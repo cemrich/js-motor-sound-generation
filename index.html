@@ -4,18 +4,20 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Generate Motor Sound with Javascript</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="js/MotorSound.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 
 	<body>
+		<h1>Dynamic motor sound with JS</h1>
 		<canvas id="canvas" width="1024" height="50"></canvas>
 		<p>
-			speed: <span id="speed">0.6</span><br>
+			<label>speed: <span id="speed">0.6</span></label>
 			<input id="speed-slider" type="range" min="0" max="3" value="0.6" step="0.01" />
 		</p>
 		<p>
-			volume: <span id="volume">0.5</span><br>
+			<label>volume: <span id="volume">0.5</span></label>
 			<input id="volume-slider" type="range" min="0" max="1" value="0.5" step="0.01" />
 		</p>
 		<button id="regenerate">Regenerate</button>

@@ -1,0 +1,20 @@
+html {
+	font-family: Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans serif;
+	width: 100%;
+	max-width: 300px;
+	margin: auto;
+}
+
+input, button, #canvas {
+	width: 100%;
+}
+
+#canvas {
+	height: 50px;
+}
+
+label {
+	text-align: left;
+	display: block;
+	width: 100%;
+}
