@@ -24,11 +24,14 @@ window.onload = function () {
 	function regenerateSound() {
 		ctx.fillStyle = getRandomGradient();  
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+		ctx.fillStyle = "#fff";
 		var imageData = ctx.getImageData(0, 0, canvas.width, 1).data;
 		var data = [];
 		for (var i = 0, len = imageData.length; i < len; i += 4) {
-			data.push(imageData[i] / 128 - 1);
+			var normalized = imageData[i] / 128 - 1;
+			data.push(normalized);
+			// draw data curve to canvas
+			ctx.fillRect(i/4, (1-normalized)*canvas.height/2, 1, 1);
 		}
 		motorSound.setData(data);
 	}
