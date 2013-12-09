@@ -11,23 +11,26 @@ window.onload = function () {
 	// get a horizontal gradient with several stops
 	function getRandomGradient() {
 		var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);  
-		gradient.addColorStop(0, "rgb(255, 0, 0)");
+		gradient.addColorStop(0, "rgba(0, 0, 0, 255)");
 		for (var i = 0.05; i < 1; i += Math.random()/8+0.01) {
-			var rand = Math.floor(Math.random() * 256);
-			gradient.addColorStop(i, "rgb(" + rand + ", 0, 0)");
+			gradient.addColorStop(i, "rgba(0, 0, 0," + Math.random() + ")");
 		}
-		gradient.addColorStop(1, "rgb(255, 0, 0)");
+		gradient.addColorStop(1, "rgba(0, 0, 0, 255)");
 		return gradient;
 	}
 
 	// make new random sound data
 	function regenerateSound() {
+		// draw new gradient
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = getRandomGradient();  
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = "#fff";
+
+		// get data from gradient
 		var imageData = ctx.getImageData(0, 0, canvas.width, 1).data;
 		var data = [];
-		for (var i = 0, len = imageData.length; i < len; i += 4) {
+		for (var i = 3, len = imageData.length; i < len; i += 4) {
 			var normalized = imageData[i] / 128 - 1;
 			data.push(normalized);
 			// draw data curve to canvas
