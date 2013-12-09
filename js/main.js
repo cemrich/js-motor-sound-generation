@@ -5,7 +5,8 @@ window.onload = function () {
 	var ctx = canvas.getContext('2d');
 
 	// actual sound stuff
-	var context = new webkitAudioContext();
+	var AudioContext = window.AudioContext || window.webkitAudioContext;
+	var context = new AudioContext();
 	var motorSound = new MotorSound(context);
 
 	// get a horizontal gradient with several stops
@@ -41,14 +42,14 @@ window.onload = function () {
 
 
 	// ui listeners
-	document.getElementById("speed-slider").onchange = function (event) {
-		var speed = event.srcElement.valueAsNumber;
+	document.getElementById("speed-slider").oninput = function (event) {
+		var speed = event.currentTarget.valueAsNumber;
 		document.getElementById("speed").innerHTML = speed;
 		motorSound.setSpeed(speed);
 	};
 
-	document.getElementById("volume-slider").onchange = function (event) {
-		var volume = event.srcElement.valueAsNumber;
+	document.getElementById("volume-slider").oninput = function (event) {
+		var volume = event.currentTarget.valueAsNumber;
 		document.getElementById("volume").innerHTML = volume;
 		motorSound.setVolume(volume);
 	};

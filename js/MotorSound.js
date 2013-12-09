@@ -7,11 +7,11 @@
 		this.isPlaying = false;
 
 		// scriptNode to change sound wave on the run
-		this.scriptNode = context.createJavaScriptNode(1024, 1, 1);
+		this.scriptNode = context.createScriptProcessor(1024);
 		this.scriptNode.onaudioprocess = this.process.bind(this);
 
 		// gainNode for volume control
-		this.gainNode = context.createGainNode();
+		this.gainNode = context.createGain();
 		this.gainNode.gain.value = 0.5;
 		this.scriptNode.connect(this.gainNode);
 	};
