@@ -23,7 +23,6 @@ window.onload = function () {
 			var value = motorSound.data[i];
 			ctx.lineTo(i/len*canvas.width, (1 - value) * canvas.height / 2);
 		}
-		console.log(motorSound.data);
 		ctx.stroke();
 	}
 
