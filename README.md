@@ -1,4 +1,4 @@
-js-motor-sound-generation
-=========================
+Dynamic motor sounds with JavaScript
+====================================
 
-Synthesizes synamic motor sound with help of the web audio api.
+Synthesizes dynamic motor sound with help of the web audio api.
