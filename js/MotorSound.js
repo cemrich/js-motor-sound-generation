@@ -44,6 +44,8 @@
 			// update buffer from data
 			channel[i] = this.data[index];
 		}
+		this.currentFrame %= this.data.length;
+		console.log(this.currentFrame);
 	};
 
 
