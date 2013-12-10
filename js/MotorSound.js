@@ -20,7 +20,7 @@
 		this.gainNode.connect(this.context.destination);
 	};
 
-	MotorSound.prototype.regenerate = function (data) {
+	MotorSound.prototype.regenerate = function () {
 		this.data = this.generator.generate();
 	};
 
@@ -45,8 +45,43 @@
 			channel[i] = this.data[index];
 		}
 		this.currentFrame %= this.data.length;
-		console.log(this.currentFrame);
 	};
+
+
+
+	var LinearGenerator = function () {
+		this.dataLength = 1024;
+	};
+
+	LinearGenerator.prototype.pushLinear = function (data, toValue, toPosition) {
+		var lastPosition = data.length - 1;
+		var lastValue = data.pop();
+		var positionDiff = toPosition - lastPosition;
+		var step = (toValue - lastValue) / positionDiff;
+		for (var i = 0; i < positionDiff; i++) {
+			data.push(lastValue + step * i);
+		}
+		return data;
+	};
+
+	LinearGenerator.prototype.generate = function () {
+		var data = [];
+		var lastValue = 1;
+		var lastPosition = 0;
+		var nextValue, nextPosition;
+
+		data.push(lastValue);
+
+		for (var i = 0.05; i < 1; i += Math.random()/8+0.01) {
+			nextPosition = Math.floor(i * this.dataLength);
+			nextValue = Math.random() * 2 - 1;
+			this.pushLinear(data, nextValue, nextPosition);
+		}
+
+		this.pushLinear(data, 1, this.dataLength);
+		return data;
+	};
+
 
 
 	var CanvasGenerator = function () {
@@ -83,7 +118,9 @@
 	};
 
 
+
 	exports.MotorSound = MotorSound;
 	exports.CanvasGenerator = CanvasGenerator;
+	exports.LinearGenerator = LinearGenerator;
 
 })(window);

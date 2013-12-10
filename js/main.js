@@ -6,12 +6,10 @@ window.onload = function () {
 	// actual sound stuff
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var context = new AudioContext();
-	var generator = new CanvasGenerator();
+	var generator = new LinearGenerator();
 	var motorSound = new MotorSound(context, generator);
 
-	function regenerateSound() {
-		motorSound.regenerate();
-
+	function drawData() {
 		// draw new gradient
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = "#000";
@@ -24,6 +22,11 @@ window.onload = function () {
 			ctx.lineTo(i/len*canvas.width, (1 - value) * canvas.height / 2);
 		}
 		ctx.stroke();
+	}
+
+	function regenerateSound() {
+		motorSound.regenerate();
+		drawData();
 	}
 
 
@@ -45,6 +48,6 @@ window.onload = function () {
 	};
 
 	// start
-	regenerateSound();
+	drawData();
 
 };
