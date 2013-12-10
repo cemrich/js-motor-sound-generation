@@ -8,9 +8,14 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+	text-align: center;
 }
 
-input, button, #canvas {
+button, select {
+	width: 49%;
+}
+
+input, #canvas {
 	width: 100%;
 }
 

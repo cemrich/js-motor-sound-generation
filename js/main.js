@@ -6,8 +6,11 @@ window.onload = function () {
 	// actual sound stuff
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var context = new AudioContext();
-	var generator = new NoiseGenerator();
-	var motorSound = new MotorSound(context, generator);
+	var generators = [
+		new MotorSound.NoiseGenerator(),
+		new MotorSound.LinearGenerator()
+	];
+	var motorSound = new MotorSound(context, generators[0]);
 
 	function drawData() {
 		// draw new gradient
@@ -29,6 +32,11 @@ window.onload = function () {
 		drawData();
 	}
 
+	function changeGenerator(index) {
+		motorSound.setGenerator(generators[index]);
+		drawData();
+	}
+
 
 	// ui listeners
 	document.getElementById("speed-slider").oninput = function (event) {
@@ -41,6 +49,10 @@ window.onload = function () {
 		var volume = event.currentTarget.valueAsNumber;
 		document.getElementById("volume").innerHTML = volume;
 		motorSound.setVolume(volume);
+	};
+
+	document.getElementById("generators").onchange = function (event) {
+		changeGenerator(event.target.selectedIndex);
 	};
 
 	document.getElementById("regenerate").onclick = function () {

@@ -28,6 +28,11 @@
 		this.gainNode.gain.value = volume;
 	};
 
+	MotorSound.prototype.setGenerator = function (generator) {
+		this.generator = generator;
+		this.regenerate();
+	};
+
 	MotorSound.prototype.setSpeed = function (speed) {
 		this.speed = speed;
 	};
@@ -150,8 +155,8 @@
 
 
 	exports.MotorSound = MotorSound;
-	exports.CanvasGenerator = CanvasGenerator;
-	exports.LinearGenerator = LinearGenerator;
-	exports.NoiseGenerator = NoiseGenerator;
+	exports.MotorSound.LinearGenerator = LinearGenerator;
+	exports.MotorSound.CanvasGenerator = CanvasGenerator;
+	exports.MotorSound.NoiseGenerator = NoiseGenerator;
 
 })(window);
