@@ -6,7 +6,7 @@ window.onload = function () {
 	// actual sound stuff
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var context = new AudioContext();
-	var generator = new LinearGenerator();
+	var generator = new NoiseGenerator();
 	var motorSound = new MotorSound(context, generator);
 
 	function drawData() {

@@ -84,6 +84,36 @@
 
 
 
+	var NoiseGenerator = function () {
+		this.dataLength = 4096;
+		this.linearLength = 30;
+		this.smoothness = 3;
+	};
+
+	NoiseGenerator.prototype.generate = function () {
+		var data = [];
+		var lastValue = 0.5;
+		data.push(lastValue);
+
+		for (var i = 1; i <= this.dataLength-this.linearLength; i++) {
+			lastValue += (Math.random() - 0.5) / this.smoothness;
+			lastValue = Math.min(1, lastValue);
+			lastValue = Math.max(-1, lastValue);
+			data.push(lastValue);
+		}
+
+		// interpolate the last view values
+		var step = (0.5 - lastValue) / this.linearLength;
+		for (var j = 0; j < this.linearLength; j++) {
+			data.push(lastValue + step * j);
+		}
+
+		data.push(0.5);
+		return data;
+	};
+
+
+
 	var CanvasGenerator = function () {
 		this.canvas = document.createElement('canvas');
 		this.canvas.width = 1024;
@@ -122,5 +152,6 @@
 	exports.MotorSound = MotorSound;
 	exports.CanvasGenerator = CanvasGenerator;
 	exports.LinearGenerator = LinearGenerator;
+	exports.NoiseGenerator = NoiseGenerator;
 
 })(window);
