@@ -29,6 +29,7 @@ window.onload = function () {
 
 	function regenerateSound() {
 		motorSound.regenerate();
+		motorSound.start();
 		drawData();
 	}
 
@@ -60,6 +61,6 @@ window.onload = function () {
 	};
 
 	// start
-	drawData();
+	regenerateSound();
 
 };

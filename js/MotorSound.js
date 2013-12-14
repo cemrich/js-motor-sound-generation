@@ -17,7 +17,14 @@
 		this.scriptNode.connect(this.gainNode);
 
 		this.regenerate();
+	};
+
+	MotorSound.prototype.start = function () {
 		this.gainNode.connect(this.context.destination);
+	};
+
+	MotorSound.prototype.stop = function () {
+		this.gainNode.disconnect(this.context.destination);
 	};
 
 	MotorSound.prototype.regenerate = function () {
